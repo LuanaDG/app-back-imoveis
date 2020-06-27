@@ -23,7 +23,7 @@ CREATE TABLE precos (
 id int(5)AUTO_INCREMENT NOT NULL,
 tipo enum('CASA', 'PREDIO', 'SALA_COMERCIAL', 'PAVILHAO') NOT NULL,
 material enum('ALVENARIA', 'MADEIRA', 'MISTA') NOT NULL,
-precoMetroQuad double NOT NULL,
+preco_metro_quad double NOT NULL,
 PRIMARY KEY (id)
 );
 
