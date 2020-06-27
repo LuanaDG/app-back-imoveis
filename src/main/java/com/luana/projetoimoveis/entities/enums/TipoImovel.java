@@ -5,8 +5,7 @@ public enum TipoImovel {
 	CASA(1, "Casa"),
 	PREDIO(2, "Prédio"),
 	SALA_COMERCIAL(3, "Sala Comercial"),
-	PAVILHAO(4, "Pavilhão"), 
-	CONTAINER(5, "Container");
+	PAVILHAO(4, "Pavilhão");
 	
 	private final Integer codigo;
 	private final String descricao;

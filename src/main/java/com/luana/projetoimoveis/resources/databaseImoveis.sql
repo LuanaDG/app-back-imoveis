@@ -9,7 +9,7 @@ USE dbimoveis;
 
 CREATE TABLE imoveis (
 id int(5)AUTO_INCREMENT NOT NULL,
-tipo enum('CASA', 'PREDIO', 'SALA_COMERCIAL', 'PAVILHAO', 'CONTAINER') NOT NULL,
+tipo enum('CASA', 'PREDIO', 'SALA_COMERCIAL', 'PAVILHAO') NOT NULL,
 material enum('ALVENARIA', 'MADEIRA', 'MISTA') NOT NULL,
 tamanho double NOT NULL,
 cidade varchar(250) NOT NULL,
@@ -21,7 +21,7 @@ PRIMARY KEY (id)
 
 CREATE TABLE precos (
 id int(5)AUTO_INCREMENT NOT NULL,
-tipo enum('CASA', 'PREDIO', 'SALA_COMERCIAL', 'PAVILHAO', 'CONTAINER') NOT NULL,
+tipo enum('CASA', 'PREDIO', 'SALA_COMERCIAL', 'PAVILHAO') NOT NULL,
 material enum('ALVENARIA', 'MADEIRA', 'MISTA') NOT NULL,
 precoMetroQuad double NOT NULL,
 PRIMARY KEY (id)
