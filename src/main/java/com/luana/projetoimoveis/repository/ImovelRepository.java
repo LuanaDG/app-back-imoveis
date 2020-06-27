@@ -1,8 +1,10 @@
 package com.luana.projetoimoveis.repository;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public class ImovelRepository {
+import com.luana.projetoimoveis.entities.Imovel;
+
+
+public interface ImovelRepository extends JpaRepository<Imovel, Integer>{
 
 }
