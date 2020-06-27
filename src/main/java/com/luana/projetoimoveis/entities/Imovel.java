@@ -5,10 +5,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.luana.projetoimoveis.entities.enums.TipoImovel;
@@ -26,9 +29,11 @@ public class Imovel implements Serializable {
 	private Integer id;
 	
 	@Column(name = "tipo")
+	@Enumerated(EnumType.STRING)
 	private TipoImovel tipo;
 	
 	@Column(name = "material")
+	@Enumerated(EnumType.STRING)
 	private TipoMaterial material;
 	
 	@Column(name = "tamanho")
@@ -41,6 +46,7 @@ public class Imovel implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "GMT" )
 	private Date dataConstrucao;
 	
+	@Transient
 	private Double valorTotal;
 
 	public Imovel() {
