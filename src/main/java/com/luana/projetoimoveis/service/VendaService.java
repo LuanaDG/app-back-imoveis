@@ -40,6 +40,12 @@ public class VendaService {
 
 	public Venda insert(Venda obj) {
 
+		obj = calculaValorTotalDoImovel(obj);
+		
+		return repository.save(obj);
+	}
+
+	private Venda calculaValorTotalDoImovel(Venda obj) {
 		// buscar imovel pelo ID
 		Optional<Imovel> imovelObj = imovelRepository.findById(obj.getIdImovel());
 		Imovel imovel = imovelObj.get();
@@ -58,31 +64,8 @@ public class VendaService {
 		//Aplica o valor total para a venda a ser cadastrada
 		obj.setValorTotal(valorTotalCalculado);
 		
-
-		return repository.save(obj);
+		return obj;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public void delete(Integer id) {
 		try {
@@ -101,6 +84,8 @@ public class VendaService {
 				throw new ResourceNotFoundException("A venda com o ID:" + id + " não existe.");
 			}
 			obj.setId(id);
+			
+			obj = calculaValorTotalDoImovel(obj);
 
 			return repository.save(obj);
 		} catch (EntityNotFoundException e) {
