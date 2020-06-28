@@ -1,18 +1,25 @@
 package com.luana.projetoimoveis.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
+import javax.xml.bind.ValidationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.luana.projetoimoveis.entities.Imovel;
 import com.luana.projetoimoveis.entities.Preco;
 import com.luana.projetoimoveis.entities.Venda;
+import com.luana.projetoimoveis.exception.BusinessException;
 import com.luana.projetoimoveis.exception.DataBaseException;
+import com.luana.projetoimoveis.exception.ResourceExceptionHandler;
 import com.luana.projetoimoveis.exception.ResourceNotFoundException;
+import com.luana.projetoimoveis.exception.StandardError;
 import com.luana.projetoimoveis.repository.ImovelRepository;
 import com.luana.projetoimoveis.repository.PrecoRepository;
 import com.luana.projetoimoveis.repository.VendaRepository;
@@ -40,9 +47,21 @@ public class VendaService {
 
 	public Venda insert(Venda obj) {
 
+		validarVenda(obj);
+
 		obj = calculaValorTotalDoImovel(obj);
 		
 		return repository.save(obj);
+	}
+
+	private void validarVenda(Venda obj) {
+		if(obj.getDataVenda().after(new Date())) {
+			throw new BusinessException("A data da venda não pode ser superior a data atual.");
+		}
+		
+		if(repository.imovelJaFoiVendido(obj.getIdImovel())) {
+			throw new BusinessException("Este imóvel não está mais disponível para venda. Por favor escolha um outro imóvel de nossa lista.");
+		}
 	}
 
 	private Venda calculaValorTotalDoImovel(Venda obj) {
@@ -54,7 +73,7 @@ public class VendaService {
 		Preco preco = precoRepository.buscaPrecoPorTipoImovelETipoMaterial(imovel.getTipo(), imovel.getMaterial());
 
 		if (preco == null) {
-			throw new EntityNotFoundException("Não existe preço cadastrado para o tipo de imóvel "
+			throw new BusinessException("Não existe preço cadastrado para o tipo de imóvel "
 					+ imovel.getTipo().getDescricao() + " e material " + imovel.getMaterial().getDescricao());
 		}
 
@@ -84,6 +103,9 @@ public class VendaService {
 				throw new ResourceNotFoundException("A venda com o ID:" + id + " não existe.");
 			}
 			obj.setId(id);
+
+			
+			validarVenda(obj);
 			
 			obj = calculaValorTotalDoImovel(obj);
 
@@ -91,5 +113,9 @@ public class VendaService {
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
+	}
+	
+	public List<Venda> listaVendasPorMesEAno(Integer mes, Integer ano){
+		return repository.listaVendasPorMesEAno(mes, ano);
 	}
 }

@@ -55,4 +55,12 @@ public class VendaResource {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@GetMapping(value = "/pormesano/{mes}/{ano}")
+	public ResponseEntity<List<Venda>> findById(@PathVariable Integer mes,@PathVariable Integer ano){
+		List<Venda> objList = service.listaVendasPorMesEAno(mes, ano);
+		return ResponseEntity.ok().body(objList);
+	}
+	
+	
 }

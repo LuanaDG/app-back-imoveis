@@ -2,11 +2,15 @@ package com.luana.projetoimoveis.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -33,6 +37,10 @@ public class Venda implements Serializable{
 	
 	@Column(name = "id_imovel")
 	private Integer idImovel;
+	
+	@OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "id_imovel", referencedColumnName = "id", insertable = false, updatable = false)
+    private Imovel imovel;
 	
 	@Column(name = "valor_total")
 	private Double valorTotal;
@@ -131,8 +139,13 @@ public class Venda implements Serializable{
 		this.valorTotal = valorTotal;
 	}
 
+	public Imovel getImovel() {
+		return imovel;
+	}
 
-
+	public void setImovel(Imovel imovel) {
+		this.imovel = imovel;
+	}
 
 	@Override
 	public int hashCode() {
