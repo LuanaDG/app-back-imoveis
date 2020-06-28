@@ -68,4 +68,8 @@ public class ImovelService {
 		}
 	}
 	
+	public List<Imovel> listaImoveisDisponiveis(){
+		return repository.listaImoveisDisponiveis();
+	}
+	
 }

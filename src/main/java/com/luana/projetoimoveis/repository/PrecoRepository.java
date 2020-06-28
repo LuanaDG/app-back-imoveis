@@ -13,5 +13,5 @@ public interface PrecoRepository extends JpaRepository<Preco, Integer>{
 	
 	@Query("SELECT p FROM Preco p WHERE p.tipo = :tipo AND p.material = :material ")
 	Preco buscaPrecoPorTipoImovelETipoMaterial(@Param("tipo") TipoImovel tipo, @Param("material") TipoMaterial tipoMaterial);
-
+	
 }

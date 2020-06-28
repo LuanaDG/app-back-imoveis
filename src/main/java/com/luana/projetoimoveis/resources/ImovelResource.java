@@ -57,4 +57,12 @@ public class ImovelResource {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@GetMapping(value = "/imoveisdisponiveis")
+	public ResponseEntity<List<Imovel>> findImoveisDisponiveis(){
+		List<Imovel> obj = service.listaImoveisDisponiveis();
+		return ResponseEntity.ok().body(obj);
+	}
+	
+	
 }
