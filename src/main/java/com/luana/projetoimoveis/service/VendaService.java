@@ -3,26 +3,23 @@ package com.luana.projetoimoveis.service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.persistence.EntityNotFoundException;
-import javax.xml.bind.ValidationException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Service;
+import javax.persistence.EntityNotFoundException;
 
 import com.luana.projetoimoveis.entities.Imovel;
 import com.luana.projetoimoveis.entities.Preco;
 import com.luana.projetoimoveis.entities.Venda;
 import com.luana.projetoimoveis.exception.BusinessException;
 import com.luana.projetoimoveis.exception.DataBaseException;
-import com.luana.projetoimoveis.exception.ResourceExceptionHandler;
 import com.luana.projetoimoveis.exception.ResourceNotFoundException;
-import com.luana.projetoimoveis.exception.StandardError;
 import com.luana.projetoimoveis.repository.ImovelRepository;
 import com.luana.projetoimoveis.repository.PrecoRepository;
 import com.luana.projetoimoveis.repository.VendaRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Service;
 
 @Service
 public class VendaService {
