@@ -32,7 +32,7 @@ public class Venda implements Serializable{
 	private String nome;
 	
 	@Column(name = "data_venda")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "GMT" )
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT" )
 	private Date dataVenda;
 	
 	@Column(name = "id_imovel")

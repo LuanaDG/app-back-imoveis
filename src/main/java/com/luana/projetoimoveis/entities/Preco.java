@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.luana.projetoimoveis.entities.enums.TipoImovel;
 import com.luana.projetoimoveis.entities.enums.TipoMaterial;
 
@@ -60,12 +62,28 @@ public class Preco implements Serializable{
 		this.tipo = tipo;
 	}
 
+	@JsonProperty("descricaoTipo")
+	public String descricaoTipoImovel(){
+		if(this.tipo!=null){
+			return this.tipo.getDescricao();
+		}
+		return null;
+	}
+
 	public TipoMaterial getMaterial() {
 		return material;
 	}
 
 	public void setMaterial(TipoMaterial material) {
 		this.material = material;
+	}
+
+	@JsonProperty("descricaoMaterial")
+	public String descricaoMaterialImovel(){
+		if(this.material!=null){
+			return this.material.getDescricao();
+		}
+		return null;
 	}
 
 	public Double getPrecoMetroQuad() {
